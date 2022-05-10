@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Evently Create Account Page</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="Styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Logo, create account heading, Username, email, password form with password confirm, then next button -->
+        <div class="logInPage">
+            <img src="log_img1.png" alt="Logo error" class="center">
+            <p id="CreateHeading">Create your account: </p>
+         <form >
+             <div class="logindetails">
+                 <label for="Uname">Username: </label><br>
+                 <input type="text" id="Uname" name="Uname"><br><br>
+            </div>
+
+            <div class="logindetails">
+                <label for="emailName">E-mail: </label><br>
+                <input type="text" id="emailName" name="emailName"><br><br>
+            </div>
+
+            <div class="logindetails">
+                <label for="Pname">Password: </label><br>
+                <input type="text" id="Pname" name="Pname"> <br><br>
+            </div>
+
+            <div class="logindetails">
+                <label for="Pname">Confirm Password: </label><br>
+                <input type="text" id="Pname" name="Pname"> <br><br>
+            </div>
+
+             <input type="submit" class="subButton">
+        </form>
+
+        </div>
+
+    </body>
+</html>
+
+<!-- Clicking submit should save the new account details to the server, and send the user to the sign in page -->

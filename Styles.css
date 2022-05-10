@@ -1,0 +1,146 @@
+hr.rounded {
+    border-top: 5px solid #8011E2;
+}
+
+body {
+    background-color: #EEECEC;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 45px;
+    background: transparent;
+}
+
+.logInPage {
+    padding: 50px;
+    width: 50%;
+    margin: auto;
+    border: 2px solid #D8D8D8;
+    border-radius: 8px;
+}
+
+.homePage {
+    padding: 20px;
+    width: 80%;
+    height:500px;
+    margin: auto;
+    border: 2px solid #D8D8D8;
+    border-radius: 8px;
+}
+
+.settingsPage {
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+    border: 2px solid #D8D8D8;
+    border-radius: 8px;
+}
+
+.logindetails {
+    margin: 0 auto;
+    width:150px;
+    font-family: 'Nunito', sans-serif;
+}
+
+.subButton {
+    margin: 0 auto;
+    background-color: #8011E2;
+    color: white;
+    border: none;
+    padding: 12px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 8px;
+    float: right;
+}
+
+
+#CreateAccount{
+    font-family: 'Nunito', sans-serif;
+    color: #8011E2;
+}
+
+input[type=text] {
+    border: 2px solid #8011E2;
+    border-radius: 5px;
+    padding: 1px;
+    background-color: #EEECEC;
+}
+
+#CreateHeading {
+    font-family: 'Nunito', sans-serif;
+    color: #8011E2;
+    font-size: x-large;
+    text-align: center;
+}
+
+.headerPage {
+    width:95%;
+    height:10%;
+    border: 2px solid #D8D8D8;
+    background-color: #D8D8D8;
+    padding: 8px;
+    margin: 10px;
+    border-radius:8px;
+}
+
+.headerImage {
+    float:left;
+    height:100%;
+}
+
+.profileImage {
+    float:right;
+    max-height:100%;
+    max-width:100%;
+}
+
+.eventHeader {
+    border: 2px dashed #D8D8D8;
+    width:95%;
+    height:5%;
+    padding: 8px;
+    margin: 10px;
+}
+
+#addEvent {
+    font-family:'Nunito', sans-serif;
+    text-align:center;
+    margin:auto;
+    padding:1px;
+}
+
+#calendarBackground {
+    max-width:95%;
+    height:350px;
+    border: 2px solid #D8D8D8;
+    background-color: #D8D8D8;
+    padding: 8px;
+    margin: 10px;
+    border-radius:8px;
+}
+
+.selectOption {
+    position: relative;
+    width: 30%;
+    height:100%;
+    flex: 1 1 auto;
+    align-self: stretch;
+    border: 2px solid #D8D8D8;
+    background-color: #D8D8D8;
+    float:left;
+}
+
+.selectSetting {
+    position: relative;
+    width: 69%;
+    height:100%;
+    flex: 1 1 auto;
+    align-self: stretch;
+    border: 2px solid #D8D8D8;
+    float:left;
+}

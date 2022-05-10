@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Evently Log-In Page</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="Styles.css">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="210133434949-tpjc2mf86rtuqpuu5sv7hp2lihei9l4b.apps.googleusercontent.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    </head>
+
+<body>
+    <div class="logInPage">
+        <!-- Image:Evently Logo, then p username, input box, p password, input box, create account link,
+         next link, div, OR SIGN in with google option -->
+         <img src="log_img1.png" alt="Logo error" class="center">
+         <form >
+             <div class="logindetails">
+                 <label for="Uname">Username: </label><br>
+                 <input type="text" id="Uname" name="Uname"><br><br>
+            </div>
+            <div class="logindetails">
+                <label for="Pname">Password: </label><br>
+                <input type="text" id="Pname" name="Pname"> <br><br>
+            </div>
+             <input type="submit" class="subButton">
+         </form>
+
+         <p id="CreateAccount">Create Account: </p>
+         <hr class="rounded">
+
+         <!-- This section will be modified in the future when the other pages are completed -->
+         <p>#INSERT GOOGLE API SIGN-IN HERE</p>
+         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+</body>
+</html>
+
+<!-- In the next part of the task, 'create account' must link to the create account page and 'submit' or 'sign in with google'
+should link to the main page of the account -->
