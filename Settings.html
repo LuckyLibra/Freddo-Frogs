@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Evently Settings</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="Styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="homePage">
+            <div class="selectOption">
+                <h2 class="settingsTitle">User Profile</h2><hr>
+                <h2 class="settingsTitle">Email Notifications</h2><hr>
+                <h2 class="settingsTitle">Administration</h2><hr>
+            </div>
+            <div class="selectSetting">
+                <div class="userProfileSettings">
+                    <div class = "userNameSettings">
+                        <label for="changeUsername" class="settingsFonts">Change username: </label>
+                        <input type="text" id="changeUsername" name="changeUsername" float="left"><br><br>
+
+                        <label for="changeEmail" class="settingsFonts">Change e-mail: </label>
+                        <input type="text" id="changeEmail" name="changeEmail" float="left"><br><br>
+
+                        <p class="settingsFonts">Dark mode:    </p>
+                        <button class="darkModeButton"></button>
+                        <button class="lightModeButton"></button>
+                    </div>
+                    <!-- Insert link to google account api -->
+                </div>
+
+                <div class="emailNotificationsSettings">
+                    <!-- Use vue here, v-if can handle client side changes based on which h2 is selected
+                    (User profile, email notifications or administration, furthermore, administration should
+                    only be available if the user is an admin) -->
+
+                </div>
+
+                <div class="administrationSettings">
+
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+</html>
