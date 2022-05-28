@@ -455,4 +455,42 @@ mysql --host=127.0.0.1 < evently.sql
 
 
 
+-----------------
+-- INSERT USER TEMPLATE --
+-----------------
 
+-- INSERT USER
+INSERT INTO User VALUES (UUID(), 'exampleuser', 'password', NULL);
+
+--INSERT USER PROFILE
+INSERT INTO User_Profile VALUES (UUID(), (SELECT user_ID FROM User WHERE username = 'exampleuser'), 'firstname', 'lastname', 'example@email.com', '/null.png');
+
+-- Insert User Preferences
+--
+-- ID set AUTOINCREMET
+-- dark_mode DEFAULT 0 ( OFF )
+-- email_notifications DEFAULT 1 ( ON )
+--
+INSERT INTO User_Preferences ( profile_ID )
+VALUES ((
+    SELECT profile_ID FROM User_Profile WHERE user_ID IN (
+        SELECT user_ID FROM User
+        WHERE username = 'exampleuser'
+))) ;
+
+-- Insert User Role
+--
+-- 1 = admin
+-- 2 = user
+--
+INSERT INTO User_Role
+VALUES ( 2, (
+    SELECT profile_ID FROM User_Profile WHERE user_ID IN (
+        SELECT user_ID FROM User
+        WHERE username = 'exampleuser'
+))) ;
+
+
+-- DELETE TEST
+--
+DELETE FROM User WHERE username='exampleuser';

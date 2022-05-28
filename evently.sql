@@ -36,8 +36,8 @@ CREATE TABLE `Attending` (
   `attendance_type` varchar(63) DEFAULT NULL,
   KEY `user_ID` (`user_ID`),
   KEY `event_ID` (`event_ID`),
-  CONSTRAINT `Attending_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`),
-  CONSTRAINT `Attending_ibfk_2` FOREIGN KEY (`event_ID`) REFERENCES `Events` (`event_ID`)
+  CONSTRAINT `Attending_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`) ON DELETE CASCADE,
+  CONSTRAINT `Attending_ibfk_2` FOREIGN KEY (`event_ID`) REFERENCES `Events` (`event_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,8 +63,8 @@ CREATE TABLE `Calendar_Events` (
   `event_ID` varchar(36) NOT NULL,
   KEY `calendar_ID` (`calendar_ID`),
   KEY `event_ID` (`event_ID`),
-  CONSTRAINT `Calendar_Events_ibfk_1` FOREIGN KEY (`calendar_ID`) REFERENCES `Google_Calendar` (`calendar_ID`),
-  CONSTRAINT `Calendar_Events_ibfk_2` FOREIGN KEY (`event_ID`) REFERENCES `Events` (`event_ID`)
+  CONSTRAINT `Calendar_Events_ibfk_1` FOREIGN KEY (`calendar_ID`) REFERENCES `Google_Calendar` (`calendar_ID`) ON DELETE CASCADE,
+  CONSTRAINT `Calendar_Events_ibfk_2` FOREIGN KEY (`event_ID`) REFERENCES `Events` (`event_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -144,7 +144,7 @@ CREATE TABLE `Event_Location` (
   `event_venue` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`location_ID`),
   KEY `address_ID` (`address_ID`),
-  CONSTRAINT `Event_Location_ibfk_1` FOREIGN KEY (`address_ID`) REFERENCES `Event_Address` (`address_ID`)
+  CONSTRAINT `Event_Location_ibfk_1` FOREIGN KEY (`address_ID`) REFERENCES `Event_Address` (`address_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,8 +177,8 @@ CREATE TABLE `Events` (
   PRIMARY KEY (`event_ID`),
   KEY `date_time_ID` (`date_time_ID`),
   KEY `location_ID` (`location_ID`),
-  CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`date_time_ID`) REFERENCES `Date_Time` (`date_time_ID`),
-  CONSTRAINT `Events_ibfk_2` FOREIGN KEY (`location_ID`) REFERENCES `Event_Location` (`location_ID`)
+  CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`date_time_ID`) REFERENCES `Date_Time` (`date_time_ID`) ON DELETE CASCADE,
+  CONSTRAINT `Events_ibfk_2` FOREIGN KEY (`location_ID`) REFERENCES `Event_Location` (`location_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,7 +205,7 @@ CREATE TABLE `Google_Calendar` (
   `calendar_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`calendar_ID`),
   KEY `user_ID` (`user_ID`),
-  CONSTRAINT `Google_Calendar_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`)
+  CONSTRAINT `Google_Calendar_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -279,8 +279,8 @@ CREATE TABLE `Role_Permissions` (
   `permission_ID` int DEFAULT NULL,
   KEY `role_ID` (`role_ID`),
   KEY `permission_ID` (`permission_ID`),
-  CONSTRAINT `Role_Permissions_ibfk_1` FOREIGN KEY (`role_ID`) REFERENCES `Role` (`role_ID`),
-  CONSTRAINT `Role_Permissions_ibfk_2` FOREIGN KEY (`permission_ID`) REFERENCES `Permission` (`permission_ID`)
+  CONSTRAINT `Role_Permissions_ibfk_1` FOREIGN KEY (`role_ID`) REFERENCES `Role` (`role_ID`) ON DELETE CASCADE,
+  CONSTRAINT `Role_Permissions_ibfk_2` FOREIGN KEY (`permission_ID`) REFERENCES `Permission` (`permission_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -306,7 +306,8 @@ CREATE TABLE `User` (
   `username` varchar(63) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `google_ID` varchar(36) DEFAULT NULL,
-  PRIMARY KEY (`user_ID`)
+  PRIMARY KEY (`user_ID`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -316,7 +317,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES ('1','bob1','password',NULL),('2','Alice2','12345',NULL);
+INSERT INTO `User` VALUES ('07304438-de60-11ec-b8ef-0022485ac961','exampleuser','password',NULL),('1','bob1','password',NULL),('2','Alice2','12345',NULL);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,8 +335,8 @@ CREATE TABLE `User_Preferences` (
   `email_notifications` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`user_preference_ID`),
   KEY `profile_ID` (`profile_ID`),
-  CONSTRAINT `User_Preferences_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `User_Preferences_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -344,7 +345,7 @@ CREATE TABLE `User_Preferences` (
 
 LOCK TABLES `User_Preferences` WRITE;
 /*!40000 ALTER TABLE `User_Preferences` DISABLE KEYS */;
-INSERT INTO `User_Preferences` VALUES (1,'1',1,1),(2,'2',0,1);
+INSERT INTO `User_Preferences` VALUES (1,'1',1,1),(2,'2',0,1),(4,'0cde7c1a-de60-11ec-b8ef-0022485ac961',0,1);
 /*!40000 ALTER TABLE `User_Preferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +365,7 @@ CREATE TABLE `User_Profile` (
   `image_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`profile_ID`),
   KEY `user_ID` (`user_ID`),
-  CONSTRAINT `User_Profile_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`)
+  CONSTRAINT `User_Profile_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -374,7 +375,7 @@ CREATE TABLE `User_Profile` (
 
 LOCK TABLES `User_Profile` WRITE;
 /*!40000 ALTER TABLE `User_Profile` DISABLE KEYS */;
-INSERT INTO `User_Profile` VALUES ('1','1','Bob','Smith','bob@gmail.com','/puppy.jpg'),('2','2','Alice','Dawson','alice@gmail.com','/kitty.jpg');
+INSERT INTO `User_Profile` VALUES ('0cde7c1a-de60-11ec-b8ef-0022485ac961','07304438-de60-11ec-b8ef-0022485ac961','firstname','lastname','example@email.com','/null.png'),('1','1','Bob','Smith','bob@gmail.com','/puppy.jpg'),('2','2','Alice','Dawson','alice@gmail.com','/kitty.jpg');
 /*!40000 ALTER TABLE `User_Profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,8 +391,8 @@ CREATE TABLE `User_Role` (
   `profile_ID` varchar(36) NOT NULL,
   KEY `role_ID` (`role_ID`),
   KEY `profile_ID` (`profile_ID`),
-  CONSTRAINT `User_Role_ibfk_1` FOREIGN KEY (`role_ID`) REFERENCES `Role` (`role_ID`),
-  CONSTRAINT `User_Role_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`)
+  CONSTRAINT `User_Role_ibfk_1` FOREIGN KEY (`role_ID`) REFERENCES `Role` (`role_ID`) ON DELETE CASCADE,
+  CONSTRAINT `User_Role_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -401,7 +402,7 @@ CREATE TABLE `User_Role` (
 
 LOCK TABLES `User_Role` WRITE;
 /*!40000 ALTER TABLE `User_Role` DISABLE KEYS */;
-INSERT INTO `User_Role` VALUES (1,'1'),(2,'2');
+INSERT INTO `User_Role` VALUES (1,'1'),(2,'2'),(2,'0cde7c1a-de60-11ec-b8ef-0022485ac961');
 /*!40000 ALTER TABLE `User_Role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -414,4 +415,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-28  2:41:04
+-- Dump completed on 2022-05-28  8:31:20
