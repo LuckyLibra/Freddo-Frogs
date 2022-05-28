@@ -310,28 +310,32 @@ WHERE preference_ID = 1 ;
 
 -- Set Dark Mode
 --
-UPDATE Preference
+-- UPDATE Preference
+-- SET dark_mode = 1
+-- WHERE
+-- preference_ID IN (
+--     SELECT preference_ID FROM User_Preferences WHERE profile_ID IN (
+--         SELECT profile_ID FROM User_Profile
+--         WHERE profile_ID = 1
+--     )
+-- ) ;
+
+UPDATE User_Preferences
 SET dark_mode = 1
-WHERE
-preference_ID IN (
-    SELECT preference_ID FROM User_Preferences WHERE profile_ID IN (
-        SELECT profile_ID FROM User_Profile
-        WHERE profile_ID = 1
-    )
-) ;
+WHERE profile_ID = 1 ;
 
 
 -- Set Email Notifications
 --
-UPDATE Preference
-SET email_notifications = 1
-WHERE
-preference_ID IN (
-    SELECT preference_ID FROM User_Preferences WHERE profile_ID IN (
-        SELECT profile_ID FROM User_Profile
-        WHERE profile_ID = 1
-    )
-) ;
+-- UPDATE Preference
+-- SET email_notifications = 1
+-- WHERE
+-- preference_ID IN (
+--     SELECT preference_ID FROM User_Preferences WHERE profile_ID IN (
+--         SELECT profile_ID FROM User_Profile
+--         WHERE profile_ID = 1
+--     )
+-- ) ;
 
 
 
@@ -447,7 +451,6 @@ mysqldump --host=127.0.0.1 --databases evently > evently.sql
 
 -- RESTORE
 mysql --host=127.0.0.1 < evently.sql
-
 
 
 

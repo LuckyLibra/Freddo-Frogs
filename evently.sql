@@ -31,8 +31,8 @@ DROP TABLE IF EXISTS `Attending`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Attending` (
-  `user_ID` int DEFAULT NULL,
-  `event_ID` int DEFAULT NULL,
+  `user_ID` varchar(36) NOT NULL,
+  `event_ID` varchar(36) NOT NULL,
   `attendance_type` varchar(63) DEFAULT NULL,
   KEY `user_ID` (`user_ID`),
   KEY `event_ID` (`event_ID`),
@@ -47,7 +47,7 @@ CREATE TABLE `Attending` (
 
 LOCK TABLES `Attending` WRITE;
 /*!40000 ALTER TABLE `Attending` DISABLE KEYS */;
-INSERT INTO `Attending` VALUES (1,1,'Author'),(2,1,'Attending');
+INSERT INTO `Attending` VALUES ('1','1','Author'),('2','1','Attending');
 /*!40000 ALTER TABLE `Attending` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,8 +59,8 @@ DROP TABLE IF EXISTS `Calendar_Events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Calendar_Events` (
-  `calendar_ID` int DEFAULT NULL,
-  `event_ID` int DEFAULT NULL,
+  `calendar_ID` varchar(36) NOT NULL,
+  `event_ID` varchar(36) NOT NULL,
   KEY `calendar_ID` (`calendar_ID`),
   KEY `event_ID` (`event_ID`),
   CONSTRAINT `Calendar_Events_ibfk_1` FOREIGN KEY (`calendar_ID`) REFERENCES `Google_Calendar` (`calendar_ID`),
@@ -85,12 +85,12 @@ DROP TABLE IF EXISTS `Date_Time`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Date_Time` (
-  `date_time_ID` int NOT NULL AUTO_INCREMENT,
+  `date_time_ID` varchar(36) NOT NULL,
   `start_date_time` datetime DEFAULT NULL,
   `end_date_time` datetime DEFAULT NULL,
   `event_duration` varchar(127) DEFAULT NULL,
   PRIMARY KEY (`date_time_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `Date_Time` (
 
 LOCK TABLES `Date_Time` WRITE;
 /*!40000 ALTER TABLE `Date_Time` DISABLE KEYS */;
-INSERT INTO `Date_Time` VALUES (1,'2022-08-18 10:00:00','2022-08-19 11:00:00',NULL),(2,'2022-08-20 11:00:00','2022-08-20 12:00:00',NULL);
+INSERT INTO `Date_Time` VALUES ('1','2022-08-18 10:00:00','2022-08-19 11:00:00',NULL),('2','2022-08-20 11:00:00','2022-08-20 12:00:00',NULL);
 /*!40000 ALTER TABLE `Date_Time` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,14 +111,14 @@ DROP TABLE IF EXISTS `Event_Address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Event_Address` (
-  `address_ID` int NOT NULL AUTO_INCREMENT,
+  `address_ID` varchar(36) NOT NULL,
   `street_number` int DEFAULT NULL,
   `street_name` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `postcode` int DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`address_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `Event_Address` (
 
 LOCK TABLES `Event_Address` WRITE;
 /*!40000 ALTER TABLE `Event_Address` DISABLE KEYS */;
-INSERT INTO `Event_Address` VALUES (1,4,'Test st','Adelaide',5000,'AU');
+INSERT INTO `Event_Address` VALUES ('1',4,'Test st','Adelaide',5000,'AU');
 /*!40000 ALTER TABLE `Event_Address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,13 +139,13 @@ DROP TABLE IF EXISTS `Event_Location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Event_Location` (
-  `location_ID` int NOT NULL AUTO_INCREMENT,
-  `address_ID` int DEFAULT NULL,
+  `location_ID` varchar(36) NOT NULL,
+  `address_ID` varchar(36) NOT NULL,
   `event_venue` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`location_ID`),
   KEY `address_ID` (`address_ID`),
   CONSTRAINT `Event_Location_ibfk_1` FOREIGN KEY (`address_ID`) REFERENCES `Event_Address` (`address_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `Event_Location` (
 
 LOCK TABLES `Event_Location` WRITE;
 /*!40000 ALTER TABLE `Event_Location` DISABLE KEYS */;
-INSERT INTO `Event_Location` VALUES (1,1,'Town Hall');
+INSERT INTO `Event_Location` VALUES ('1','1','Town Hall');
 /*!40000 ALTER TABLE `Event_Location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,9 +166,9 @@ DROP TABLE IF EXISTS `Events`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Events` (
-  `event_ID` int NOT NULL AUTO_INCREMENT,
-  `date_time_ID` int DEFAULT NULL,
-  `location_ID` int DEFAULT NULL,
+  `event_ID` varchar(36) NOT NULL,
+  `date_time_ID` varchar(36) NOT NULL,
+  `location_ID` varchar(36) NOT NULL,
   `event_name` varchar(255) DEFAULT NULL,
   `event_description` text,
   `event_image_url` varchar(255) DEFAULT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE `Events` (
   KEY `location_ID` (`location_ID`),
   CONSTRAINT `Events_ibfk_1` FOREIGN KEY (`date_time_ID`) REFERENCES `Date_Time` (`date_time_ID`),
   CONSTRAINT `Events_ibfk_2` FOREIGN KEY (`location_ID`) REFERENCES `Event_Location` (`location_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `Events` (
 
 LOCK TABLES `Events` WRITE;
 /*!40000 ALTER TABLE `Events` DISABLE KEYS */;
-INSERT INTO `Events` VALUES (1,1,1,'Event 1','This is an event...',NULL,'Bob1',100);
+INSERT INTO `Events` VALUES ('1','1','1','Event 1','This is an event...',NULL,'Bob1',100);
 /*!40000 ALTER TABLE `Events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,8 +200,8 @@ DROP TABLE IF EXISTS `Google_Calendar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Google_Calendar` (
-  `calendar_ID` int NOT NULL AUTO_INCREMENT,
-  `user_ID` int DEFAULT NULL,
+  `calendar_ID` varchar(36) NOT NULL,
+  `user_ID` varchar(36) NOT NULL,
   `calendar_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`calendar_ID`),
   KEY `user_ID` (`user_ID`),
@@ -241,31 +241,6 @@ LOCK TABLES `Permission` WRITE;
 /*!40000 ALTER TABLE `Permission` DISABLE KEYS */;
 INSERT INTO `Permission` VALUES (1,'manage_user_info',1),(2,'manage_users',1),(3,'manage_events',1),(4,'signup_admin',1);
 /*!40000 ALTER TABLE `Permission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Preference`
---
-
-DROP TABLE IF EXISTS `Preference`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Preference` (
-  `preference_ID` int NOT NULL AUTO_INCREMENT,
-  `dark_mode` tinyint(1) DEFAULT '0',
-  `email_notifications` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`preference_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Preference`
---
-
-LOCK TABLES `Preference` WRITE;
-/*!40000 ALTER TABLE `Preference` DISABLE KEYS */;
-INSERT INTO `Preference` VALUES (1,1,1),(2,0,0);
-/*!40000 ALTER TABLE `Preference` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -327,11 +302,12 @@ DROP TABLE IF EXISTS `User`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User` (
-  `user_ID` int NOT NULL AUTO_INCREMENT,
+  `user_ID` varchar(36) NOT NULL,
   `username` varchar(63) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `google_ID` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`user_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +316,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'bob1','password'),(2,'Alice2','12345');
+INSERT INTO `User` VALUES ('1','bob1','password',NULL),('2','Alice2','12345',NULL);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,14 +329,13 @@ DROP TABLE IF EXISTS `User_Preferences`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User_Preferences` (
   `user_preference_ID` int NOT NULL AUTO_INCREMENT,
-  `preference_ID` int DEFAULT NULL,
-  `profile_ID` int DEFAULT NULL,
+  `profile_ID` varchar(36) NOT NULL,
+  `dark_mode` tinyint(1) DEFAULT '0',
+  `email_notifications` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`user_preference_ID`),
-  KEY `preference_ID` (`preference_ID`),
   KEY `profile_ID` (`profile_ID`),
-  CONSTRAINT `User_Preferences_ibfk_1` FOREIGN KEY (`preference_ID`) REFERENCES `Preference` (`preference_ID`),
   CONSTRAINT `User_Preferences_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,7 +344,7 @@ CREATE TABLE `User_Preferences` (
 
 LOCK TABLES `User_Preferences` WRITE;
 /*!40000 ALTER TABLE `User_Preferences` DISABLE KEYS */;
-INSERT INTO `User_Preferences` VALUES (1,1,1),(2,2,2);
+INSERT INTO `User_Preferences` VALUES (1,'1',1,1),(2,'2',0,1);
 /*!40000 ALTER TABLE `User_Preferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,8 +356,8 @@ DROP TABLE IF EXISTS `User_Profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User_Profile` (
-  `profile_ID` int NOT NULL AUTO_INCREMENT,
-  `user_ID` int DEFAULT NULL,
+  `profile_ID` varchar(36) NOT NULL,
+  `user_ID` varchar(36) NOT NULL,
   `first_name` varchar(63) DEFAULT NULL,
   `last_name` varchar(63) DEFAULT NULL,
   `email` varchar(127) DEFAULT NULL,
@@ -390,7 +365,7 @@ CREATE TABLE `User_Profile` (
   PRIMARY KEY (`profile_ID`),
   KEY `user_ID` (`user_ID`),
   CONSTRAINT `User_Profile_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -399,7 +374,7 @@ CREATE TABLE `User_Profile` (
 
 LOCK TABLES `User_Profile` WRITE;
 /*!40000 ALTER TABLE `User_Profile` DISABLE KEYS */;
-INSERT INTO `User_Profile` VALUES (1,1,'Bob','Smith','bob@gmail.com','/puppy.jpg'),(2,2,'Alice','Dawson','alice@gmail.com','/kitty.jpg');
+INSERT INTO `User_Profile` VALUES ('1','1','Bob','Smith','bob@gmail.com','/puppy.jpg'),('2','2','Alice','Dawson','alice@gmail.com','/kitty.jpg');
 /*!40000 ALTER TABLE `User_Profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,7 +387,7 @@ DROP TABLE IF EXISTS `User_Role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `User_Role` (
   `role_ID` int DEFAULT NULL,
-  `profile_ID` int DEFAULT NULL,
+  `profile_ID` varchar(36) NOT NULL,
   KEY `role_ID` (`role_ID`),
   KEY `profile_ID` (`profile_ID`),
   CONSTRAINT `User_Role_ibfk_1` FOREIGN KEY (`role_ID`) REFERENCES `Role` (`role_ID`),
@@ -426,7 +401,7 @@ CREATE TABLE `User_Role` (
 
 LOCK TABLES `User_Role` WRITE;
 /*!40000 ALTER TABLE `User_Role` DISABLE KEYS */;
-INSERT INTO `User_Role` VALUES (1,1),(2,2);
+INSERT INTO `User_Role` VALUES (1,'1'),(2,'2');
 /*!40000 ALTER TABLE `User_Role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -439,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-27  5:04:42
+-- Dump completed on 2022-05-28  2:41:04
