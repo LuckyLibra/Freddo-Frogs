@@ -215,6 +215,7 @@ CREATE TABLE `Google_Calendar` (
 
 LOCK TABLES `Google_Calendar` WRITE;
 /*!40000 ALTER TABLE `Google_Calendar` DISABLE KEYS */;
+INSERT INTO `Google_Calendar` VALUES ('236d2e9c-def2-11ec-96be-000d3ac831d5','23634de9-def2-11ec-96be-000d3ac831d5',NULL),('8904f445-def3-11ec-96be-000d3ac831d5','88fb1b3e-def3-11ec-96be-000d3ac831d5',NULL),('ddf663a2-def1-11ec-96be-000d3ac831d5','dde984f1-def1-11ec-96be-000d3ac831d5',NULL);
 /*!40000 ALTER TABLE `Google_Calendar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +318,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES ('07304438-de60-11ec-b8ef-0022485ac961','exampleuser','password',NULL),('1','bob1','password',NULL),('2','Alice2','12345',NULL);
+INSERT INTO `User` VALUES ('07304438-de60-11ec-b8ef-0022485ac961','exampleuser','password',NULL),('1','bob1','password',NULL),('2','Alice2','12345',NULL),('23634de9-def2-11ec-96be-000d3ac831d5','Test2','$argon2i$v=19$m=4096,t=3,p=1$4rfxpatGpDIosNxmIPGTyw$H59Yw7mqFxtzOXRp/XthEsEY6AdfNMv+bR/EUdP2OnI',NULL),('88fb1b3e-def3-11ec-96be-000d3ac831d5','Test4','$argon2i$v=19$m=4096,t=3,p=1$EjimeAvqfhg0QfUDPd8YPA$OI4qWwLeD9mpchR8CxyKx9mn9McZdwxLisX+jXfwEv4',NULL),('dde984f1-def1-11ec-96be-000d3ac831d5','Test1','$argon2i$v=19$m=4096,t=3,p=1$K/6fJaiDtF93ro8exFlhag$xoZ0r0ZBF2Fb62RNOzwE13DFiWNUcnFLSFdDqDaWWeE',NULL);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -336,7 +337,7 @@ CREATE TABLE `User_Preferences` (
   PRIMARY KEY (`user_preference_ID`),
   KEY `profile_ID` (`profile_ID`),
   CONSTRAINT `User_Preferences_ibfk_2` FOREIGN KEY (`profile_ID`) REFERENCES `User_Profile` (`profile_ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,7 +346,7 @@ CREATE TABLE `User_Preferences` (
 
 LOCK TABLES `User_Preferences` WRITE;
 /*!40000 ALTER TABLE `User_Preferences` DISABLE KEYS */;
-INSERT INTO `User_Preferences` VALUES (1,'1',1,1),(2,'2',0,1),(4,'0cde7c1a-de60-11ec-b8ef-0022485ac961',0,1);
+INSERT INTO `User_Preferences` VALUES (1,'1',1,1),(2,'2',0,1),(4,'0cde7c1a-de60-11ec-b8ef-0022485ac961',0,1),(5,'ddec21b8-def1-11ec-96be-000d3ac831d5',0,1),(6,'2365d389-def2-11ec-96be-000d3ac831d5',0,1),(7,'88fdd988-def3-11ec-96be-000d3ac831d5',0,1);
 /*!40000 ALTER TABLE `User_Preferences` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,6 +365,7 @@ CREATE TABLE `User_Profile` (
   `email` varchar(127) DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`profile_ID`),
+  UNIQUE KEY `email` (`email`),
   KEY `user_ID` (`user_ID`),
   CONSTRAINT `User_Profile_ibfk_1` FOREIGN KEY (`user_ID`) REFERENCES `User` (`user_ID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -375,7 +377,7 @@ CREATE TABLE `User_Profile` (
 
 LOCK TABLES `User_Profile` WRITE;
 /*!40000 ALTER TABLE `User_Profile` DISABLE KEYS */;
-INSERT INTO `User_Profile` VALUES ('0cde7c1a-de60-11ec-b8ef-0022485ac961','07304438-de60-11ec-b8ef-0022485ac961','firstname','lastname','example@email.com','/null.png'),('1','1','Bob','Smith','bob@gmail.com','/puppy.jpg'),('2','2','Alice','Dawson','alice@gmail.com','/kitty.jpg');
+INSERT INTO `User_Profile` VALUES ('0cde7c1a-de60-11ec-b8ef-0022485ac961','07304438-de60-11ec-b8ef-0022485ac961','firstname','lastname','example@email.com','/null.png'),('1','1','Bob','Smith','bob@gmail.com','/puppy.jpg'),('2','2','Alice','Dawson','alice@gmail.com','/kitty.jpg'),('2365d389-def2-11ec-96be-000d3ac831d5','23634de9-def2-11ec-96be-000d3ac831d5',NULL,NULL,NULL,NULL),('88fdd988-def3-11ec-96be-000d3ac831d5','88fb1b3e-def3-11ec-96be-000d3ac831d5',NULL,NULL,'test4@gmail.com',NULL),('ddec21b8-def1-11ec-96be-000d3ac831d5','dde984f1-def1-11ec-96be-000d3ac831d5',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `User_Profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -402,7 +404,7 @@ CREATE TABLE `User_Role` (
 
 LOCK TABLES `User_Role` WRITE;
 /*!40000 ALTER TABLE `User_Role` DISABLE KEYS */;
-INSERT INTO `User_Role` VALUES (1,'1'),(2,'2'),(2,'0cde7c1a-de60-11ec-b8ef-0022485ac961');
+INSERT INTO `User_Role` VALUES (1,'1'),(2,'2'),(2,'0cde7c1a-de60-11ec-b8ef-0022485ac961'),(2,'ddec21b8-def1-11ec-96be-000d3ac831d5'),(2,'2365d389-def2-11ec-96be-000d3ac831d5'),(2,'88fdd988-def3-11ec-96be-000d3ac831d5');
 /*!40000 ALTER TABLE `User_Role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -415,4 +417,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-28  8:31:20
+-- Dump completed on 2022-05-30  2:49:40
